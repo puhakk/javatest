@@ -35,18 +35,75 @@ public class forTest {
 	}
 
 	public void test3() {
-		for (int i = 0; i < 7 ; i++) {
+		for (int i = 0; i < 7; i++) {
 			System.out.println("안녕하세요");
 		}
 	}
+
 	public void test4() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("몇 단을 출력하시겠습니까?");
 		int num = sc.nextInt();
-		
+
 		System.out.println("2단 입니다.");
-		for (int i = 0; i < ; i++) {
-			
+		for (int i = 0; i < 9; i++) {
+			System.out.println("2 * " + (i + 1) + " = " + (2 * i + 2));
 		}
 	}
-}
+
+	public void exam1() {
+		Scanner sc = new Scanner(System.in);
+
+		int sum = 0; // 입력 받은 정수의 총 함은 누적해서 저장하기 위한 변수 / 시작은 0
+
+		for (int i = 0; i < 5; i++) {
+			System.out.print("정수 값을 입력하시오 : ");
+			int num = sc.nextInt();
+			sum += num; // sum = sum + num;
+
+		}
+		System.out.println("입력하신 변수의 총 합은 : " + sum);
+
+	}
+
+	public void exam2() {
+		Scanner sc = new Scanner(System.in);
+		int sum = 0;
+
+		System.out.print("첫 번째 수 입력 : ");
+		int num = sc.nextInt();
+
+		System.out.print("두 번째 수 입력 : ");
+		int num1 = sc.nextInt();
+
+		for (int i = num; i <= num1; i++) {
+			sum += i;
+		}
+		System.out.printf("%d ~ %d의 정수의 합 : %d", num, num1, sum);
+	}
+
+	public void exam3() {
+		Scanner sc = new Scanner(System.in);
+		int num = 0;
+
+		System.out.print("숫자 입력 : ");
+		int num1 = sc.nextInt();
+		int sum = 0;
+		
+		for(int i=0; i<=num; i++) {
+			if(i%2 == 0) {
+			sum += i;
+			}
+		System.out.println("총 합은 : "+sum);
+		
+		}
+	}
+		public void exam4() {
+			for(int i = 5; i>0; i--) {
+				System.out.println(i + "_HI");
+			
+			
+			}
+		}
+	}
+
