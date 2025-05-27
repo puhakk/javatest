@@ -44,9 +44,8 @@ public class forTest {
 		System.out.println("몇 단을 출력하시겠습니까?");
 		int num = sc.nextInt();
 		
-		System.out.println("2단 입니다.");
-		for (int i = 0; i < ; i++) {
+		
 			
 		}
 	}
-}
+
