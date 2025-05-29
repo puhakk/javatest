@@ -1,5 +1,7 @@
 package kh.java.func;
 
+import java.security.DrbgParameters.NextBytes;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ArrayTest {
@@ -167,7 +169,8 @@ public class ArrayTest {
 		//방을 관리할 배열 >> 방은 총 10개 >> 길이가 10인 배열 생성
 		//난이도 하 : 정수 >> 0이면 빈방, 1이면 손님이 있는 방
 		//난이도 상 : 논리형 >> false 빈방, true 손님이 있는 방
-		int[] rooms = new int[10];//배열을 할당하면 기본값으로 세팅(정수 >> 0 >> 모두 빈방인 상태로 세팅)
+		//int[] rooms = new int[10];//배열을 할당하면 기본값으로 세팅(정수 >> 0 >> 모두 빈방인 상태로 세팅)
+		boolean[] rooms = new boolean[10]; 
 		boolean power = true;
 		while(power) {
 			System.out.println("\n---------------모텔 관리 프로그램-------------------");
@@ -180,40 +183,203 @@ public class ArrayTest {
 			switch(select) {
 			case 1 : 
 				//구현순서 2
-				
-				int[] roomN = {1,2,3,4,5,6,7,8,9,10};
-				System.out.print("몇 번 방에 입실하시겠습니까? ");
-				int user = sc.nextInt();
-				
-				for(int i=0;i<10;i++) {
-					System.out.println(roomN[i] + "번 방에는 있습니다.");
-					rooms[i] = sc.nextInt();
+				System.out.println("몇 번 방에 입실하시겠습니까?");
+				int inroomno = sc.nextInt();
+				//입실 >> 해당 방의 데이터를 1로 변경
+				//입실 처리 전 해당 방에 현재 손님이 있는 지 체크 후 빈방이면 입실
+				if(rooms[inroomno -1]) {
+					System.out.println(inroomno + "번 방에 손님이 있습니다.");
+				}else { 
+					rooms[inroomno - 1] = true;
+					System.out.println(inroomno + "번 방에 입실 했습니다.");
 				}
-				 
-				
 				break;
 			case 2 : 
 				//구현순서 3
+				System.out.print("몇 번 방에서 퇴실 하시겠습니까?");
+				int outroom = sc.nextInt();
+				if(!rooms[outroom-1]) {
+					System.out.println(outroom + "번 방은 빈방입니다.");
+				}else {
+					rooms[outroom-1] = false;
+					System.out.println("번 방에서 퇴실하셨습니다.");
+				}
 				break;
 			case 3 : 
 				//구현1순서 1
 				for(int i=0;i<10;i++) {
-					if(rooms[i] == 1) {
+					if(rooms[i]) {
 						System.out.println((i+1)+"번 방에 손님이 있습니다");
 					}else {
 						System.out.println((i+1)+"번 방은 빈방입니다.");
 					}
-			
 				}
 				break;
 			case 4 : 
+				System.out.println("안녕히가세요.");
 				power = false;
 				break;
-				
 			}
 		}
 	}
+	
+	
+		public void exam4() {
+			Scanner sc = new Scanner(System.in);
+			//int [] arr = {5,4,2,1,3};
+			
+			int[] arr = new int[5];
+			//배열.lenght >> 현재 배열의 길이를 정수 형태로 가져옴
+			for(int i=0;i<arr.length-1;i++) {
+				System.out.print((i+1)+"번째 숫자 입력 : ");
+				arr[i] = sc.nextInt();
+			}
+			
+			//배열 0번 인덱스에 있는 수와,배열 1번 인덱스에 있는 수를 비교해서 0번 인덱스의 수가 더 크면 자리르 바꾸는 코드
+			for(int i=0;i<arr.length-1;i++) {
+			
+			for(int j=0;j<arr.length-1-i;j++) {
+				if(arr[j] > arr[j+1]) {
+					int tmp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = tmp;
+				}
+			  }
+			}
+			  
+			/*
+			for(int i=0;i<3;i++) {
+				if(arr[i] > arr[i+1]) {
+					int tmp = arr[i];
+					arr[i] = arr[i+1];
+					arr[i+1] = tmp;
+			/*
+			
+			if(arr[0] > arr[1]) {
+				int tmp = arr[0];
+				arr[0] = arr[1];
+				arr[1] = tmp;
+			}
+			if(arr[1] > arr[2]) {
+				int tmp = arr[1];
+				arr[1] = arr[2];
+				arr[2] = tmp;
+			}
+			if(arr[2] > arr[3]) {
+				int tmp = arr[2];
+				arr[2] = arr[3];
+				arr[3] = tmp;
+			}	
+			if(arr[3] > arr[4]) {
+				int tmp = arr[3];
+				arr[3] = arr[4];
+				arr[4] = tmp;
+			*/
+				
+			for(int i=0;i<5;i++) {
+				System.out.print(arr[i]+"\t");
+				
+			}
+		}
+    
+
+		
+	public void lotto() {
+		Scanner sc = new Scanner(System.in);
+		Random r = new Random();
+		int arr[] = new int[6];
+		int com = r.nextInt();
+		System.out.println("=====================로또 프로그램========================");
+		
+		for(int i=0;i<arr.length;i++) {
+			System.out.print((i+1)+"번째 번호 입력1(~45) : ");
+			arr[i] = sc.nextInt();
+			
+			//로또번호 입력값 제약조건
+			//1) 입력한 숫자가 1~45의 숫자여야 함
+			//2) 입력 숫자는 중복 X
+			//두 조건 중 입력한 숫자가 정상범위여야 중복체크 진행하는 순서로 작업
+			//>> 입력한 숫자가 정상범위가 아니면 중복체크가 의미없음 >> 무조건 중복이 아니라고 나오니까
+		if(1<=arr[i]&&arr[i]<=45) {
+			//입력 범위가 정상 >> 중복체크
+			for(int j=0;j<i;j++) {
+				if(arr[i] == arr[j]) {
+					i--;
+					System.out.println("이미 중복된 숫자입니다.");
+					break;
+				}
+			}
+		}else {
+			//입력 범위가 비정상 >> 메세지 출력하고 이번회차 다시 입력받기
+			i--;
+			System.out.println("1~45 범위의 숫자를 입력하세요.");
+		}
+	}
+		int[]comNum = new int[6];
+		for(int i=0;i<comNum.length;i++) {
+			comNum[i] = r.nextInt();
+			for(int j=0;j<i;i++) {
+				if(comNum[i] == comNum[j]) {
+					i--;
+					break;
+				}
+			}
+		}
+		//사용자 번호 정렬
+		for(int j=0;j<arr.length-1;j++) {
+			if(arr[j] > arr[j+1]) {
+				int tmp = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = tmp;
+	      }
+       }
+		//컴퓨터 번호 정렬
+		for(int j=0;j<comNum.length-1;j++) {
+			if(comNum[j] > comNum[j+1]) {
+				int tmp = comNum[j];
+				comNum[j] = comNum[j+1];
+				comNum[j+1] = tmp;
+			}
+		}
+		System.out.println("===============최종결과================");
+		System.out.println("사용자 번호 : ");
+		for(int i=0;i<arr.length;i++) {
+			System.out.print(arr[i] + " ");
+		}
+		System.out.println();
+		System.out.println("컴퓨터 번호");
+		for(int i=0;i<comNum.length;i++) {
+			
+	
+	}
+		}
 }
+	
+		
+		
+		
+		
+		
+		
+
+
+		
+			
+			
+		
+		
+	
+	
+
+	
+				
+		
+	
+
+		
+	 
+	
+			
 
 
 
